@@ -8,7 +8,7 @@ version = "0.1.0"
 description = "Implementation, training, evaluation, and inference workflow for ISG-MDA."
 readme = "README.md"
 requires-python = ">=3.9,<3.12"
-license = { text = "License decision pending author and institution approval." }
+license = { text = "MIT" }
 authors = [{ name = "HNUBIGroup" }]
 dependencies = [
   "numpy",
@@ -27,4 +27,3 @@ dependencies = [
 
 [tool.setuptools.packages.find]
 where = ["src"]
-
