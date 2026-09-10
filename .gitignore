@@ -1,0 +1,65 @@
+# Generated outputs
+outputs/
+results/
+checkpoints/
+predictions/
+embeddings/
+logs/
+cache/
+
+# Python and test caches
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Model and array artifacts
+*.pt
+*.pth
+*.ckpt
+*.npy
+*.npz
+*.pkl
+*.pickle
+*.safetensors
+
+# Logs and scheduler output
+*.log
+slurm-*.out
+slurm-*.err
+*.out
+*.err
+
+# Data and experiment tables and documents
+*.csv
+*.tsv
+*.parquet
+*.feather
+*.h5
+*.hdf5
+*.pdf
+*.docx
+
+# Local data: retain documentation and optional synthetic examples only
+data/*
+!data/README.md
+!data/example/
+!data/example/**
+
+# Internal status and audit material
+internal/
+audits/
+status/
+snapshots/
+*_INTERNAL_*
+*_AUDIT*
+*_STATUS*
+*_SNAPSHOT*
+*_MANIFEST*
+
+# Editors and operating systems
+.DS_Store
+.idea/
+.vscode/
+*.swp

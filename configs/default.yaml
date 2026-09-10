@@ -1,0 +1,75 @@
+schema_version: 1
+
+model:
+  mirna:
+    topology_encoder: CNNFeatureExtractor
+    semantic_encoder: RNAFMFeatureExtractor
+    semantic_backbone: rna_fm_t12
+    semantic_backbone_trainable: false
+    semantic_projection_trainable: true
+    output_dim: 128
+    sequence_max_length: 24
+  drug:
+    topology_encoder: GATFeatureExtractor
+    atom_input_dim: 69
+    hidden_dim: 128
+    output_dim: 128
+    gat_heads: 2
+    gat_layers: 3
+    semantic_encoder: ChemBERTaFeatureExtractor
+    semantic_backbone: DeepChem/ChemBERTa-77M-MLM
+    semantic_backbone_trainable: false
+    semantic_projection_trainable: true
+    smiles_max_length: 512
+    graph_max_nodes: 100
+  entity_fusion:
+    operation: bidirectional_cross_attention_residual_layernorm_sum
+    feature_dim: 128
+    attention_heads: 2
+    attention_dropout: 0.1
+    ffn_hidden_dim: 256
+    ffn_dropout: 0.1
+  pair_representation:
+    formula: "concat(m, d, abs(m-d), m*d)"
+    block_order: [mirna, drug, absolute_difference, signed_elementwise_product]
+    block_dim: 128
+    input_dim: 512
+  prediction_head:
+    layers: [512, 256, 1]
+    hidden_activation: ReLU
+    dropout: 0.2
+    output_activation: Sigmoid
+
+training:
+  loss: BCELoss
+  optimizer: Adam
+  learning_rate: 0.0005
+  weight_decay: 0.0005
+  batch_size: 32
+  dataloader_workers: 0
+  epochs: 80
+  early_stopping: false
+  checkpoint_policy: fixed_final_epoch
+  seed: 0
+  device: cuda
+
+data:
+  drug_table: "${DATA_ROOT}/drugs.tsv"
+  mirna_table: "${DATA_ROOT}/mirnas.tsv"
+  train_pairs: "${DATA_ROOT}/splits/train.tsv"
+  test_pairs: "${DATA_ROOT}/splits/test.tsv"
+  drug_id_column: drug_index
+  smiles_column: SMILES
+  mirna_id_column: mirna_index
+  sequence_column: miRNA_Sequence
+  pair_columns: [mirna_index, drug_index, label]
+  positive_label: 1
+
+output:
+  root: outputs
+
+metrics:
+  classification_threshold: 0.5
+  ece_bins: 10
+  probability_clip: [0.0000001, 0.9999999]
+

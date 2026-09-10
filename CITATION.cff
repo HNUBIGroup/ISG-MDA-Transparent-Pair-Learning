@@ -1,0 +1,22 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite the associated manuscript."
+title: "Transparent multimodal pairwise learning for miRNA-drug response association prediction under distribution shift"
+type: software
+version: "0.1.0"
+license: MIT
+authors:
+  - family-names: Zhou
+    given-names: Yun
+  - family-names: Zhang
+    given-names: Min
+  - family-names: Lian
+    given-names: Maoqi
+  - family-names: Zhang
+    given-names: Yufang
+  - family-names: Wang
+    given-names: Wei
+  - family-names: Liu
+    given-names: Dong
+  - family-names: Wei
+    given-names: Dong-Qing
+repository-code: "https://github.com/HNUBIGroup/ISG-MDA-Transparent-Pair-Learning"

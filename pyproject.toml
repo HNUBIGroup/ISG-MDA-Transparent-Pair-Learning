@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "isg-mda"
+version = "0.1.0"
+description = "Implementation, training, evaluation, and inference workflow for ISG-MDA."
+readme = "README.md"
+requires-python = ">=3.9,<3.12"
+license = { text = "License decision pending author and institution approval." }
+authors = [{ name = "HNUBIGroup" }]
+dependencies = [
+  "numpy",
+  "pandas",
+  "scipy",
+  "scikit-learn",
+  "matplotlib",
+  "PyYAML",
+  "openpyxl",
+  "rdkit",
+  "torch",
+  "torch-geometric",
+  "transformers",
+  "rna-fm==0.2.2",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
